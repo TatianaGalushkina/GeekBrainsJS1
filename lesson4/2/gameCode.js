@@ -172,13 +172,10 @@ alert('Спасибо за игру');
 
 do {
     var eventNum = parseInt(prompt("Вы сделали " + answers.length + " хода. Введите номер хода: "));
-} while (isNaN(eventNum) && eventNum > answers.length && eventNum <= 0);
+} while (isNaN(eventNum) || eventNum > answers.length || eventNum <= 0);
 
 if (answers[eventNum - 1] != undefined) {
     alert(answers[eventNum - 1]);
-}
-else{
-    alert("Вы так много не играли");
 }
 
 //------------------------------------------
