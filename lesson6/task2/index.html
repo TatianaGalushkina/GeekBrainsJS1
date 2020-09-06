@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="scripts/script.js"></script>
+</head>
+
+<body>
+    <div class="product">
+        <ul class="product-list">
+            <li class="product-list-item">
+                <img src="img/apple.jpg" alt="img" width="150" heigth="100">
+                <p class="title">Яблоко</p>
+                <p class="price">300</p>
+                <button onclick="putInCart()" id="button_1">Купить</button>
+            </li>
+            <li class="product-list-item">
+                <img src="img/orange.jpg" alt="img" width="150" heigth="100">
+                <p class="title">Апельсин</p>
+                <p class="price">200</p>
+                <button onclick="putInCart()" id="button_2">Купить</button>
+            </li>
+            <li class="product-list-item">
+                <img src="img/watermelon.jpg" alt="img" width="150" heigth="100">
+                <p class="title">Арбуз</p>
+                <p class="price">100</p>
+                <button onclick="putInCart()" id="button_3">Купить</button>
+            </li>
+        </ul>
+    </div>
+    <div class="cart" >
+       <h1>Корзина</h1>
+        <ul class="cart-list" id="cart">
+            
+            
+        </ul>
+       <p class="totalAmount"></p>
+    </div>
+</body>
+
+</html>
