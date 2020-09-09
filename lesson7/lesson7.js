@@ -180,6 +180,9 @@ function haveFood(unit) {
         createWall();
 
         score++;
+		//выводим результат
+		var scoreTxt = document.querySelector(".score");
+		scoreTxt.innerHTML= "Ваш результат: " + score;
     }
         
     return check;

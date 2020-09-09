@@ -37,3 +37,8 @@ td.game-table-cell{
     margin: 30px auto 0;
     text-align: center;
 }
+.score{
+	width: 361px;
+    height: 361px;
+	text-align:left;
+}
