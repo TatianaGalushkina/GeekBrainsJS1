@@ -3,6 +3,7 @@ var FIELD_SIZE_X = 20;//строки
 var FIELD_SIZE_Y = 20;//столбцы
 var SNAKE_SPEED = 200; // Интервал между перемещениями змейки
 var snake = []; // Сама змейка
+var wall = []; //Массив с элементами препятствий
 var direction = 'y+'; // Направление движения змейки
 var gameIsRunning = false; // Запущена ли игра
 var snake_timer; // Таймер змейки
@@ -94,8 +95,6 @@ function respawn() {
 }
 
 
-
-
 /**
  * Движение змейки
  */
@@ -127,8 +126,9 @@ function move() {
     // Проверки
     // 1) new_unit не часть змейки
     // 2) Змейка не ушла за границу поля
+	// 3) Змейка не попала в препятствие
     //console.log(new_unit);
-    if (!isSnakeUnit(new_unit) && new_unit !== undefined) {
+    if (!isSnakeUnit(new_unit) && new_unit !== undefined && !haveWall(new_unit)) {
         // Добавление новой части змейки
         new_unit.setAttribute('class', new_unit.getAttribute('class') + ' snake-unit');
         snake.push(new_unit);
@@ -137,7 +137,7 @@ function move() {
        
 	   if (!haveFood(new_unit)) {
             // Находим хвост
-           var removed = snake.splice(0, 1)[0];
+            var removed = snake.splice(0, 1)[0];
             var classes = removed.getAttribute('class').split(' ');
 			
             // удаляем хвост
@@ -162,6 +162,7 @@ function isSnakeUnit(unit) {//проверка, что змейка не поп�
     }
     return check;
 }
+
 /**
  * проверка на еду
  * @param unit
@@ -179,12 +180,29 @@ function haveFood(unit) {
         createWall();
 
         score++;
+		//выводим результат
+		var scoreTxt = document.querySelector(".score");
+		scoreTxt.innerHTML= "Ваш результат: " + score;
+    }
+        
+    return check;
+}
+
+/**
+ * проверка на препятствие
+ * @param unit
+ * @returns {boolean}
+ */
+function haveWall(unit) {
+    var check = false;
+
+    var unit_classes = unit.getAttribute('class').split(' ');
+
+    // Если препятствие завершаем игру
+    if (unit_classes.includes('wall-unit')) {
+        check = true;
     }
     
-    // Если препятствияе
-    if (unit_classes.includes('wall-unit')){
-        
-    }
     return check;
 }
 
@@ -239,6 +257,18 @@ function createWall() {
             wall_cell.setAttribute('class', classes + 'wall-unit');
             wallCreated = true;
         }
+		
+		//записываем в массив элементы препятствий		
+		wall.push(wall_cell);
+		
+		if(wall.length > 1){
+			var removed = wall.splice(0, 1)[0];
+			var classes = removed.getAttribute('class').split(' ');
+			
+            // удаляем стену
+            removed.setAttribute('class', classes[0] + ' ' + classes[1]);
+		}
+		console.log(removed);
     }
 }
 /**
